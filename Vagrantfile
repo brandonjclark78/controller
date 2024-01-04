@@ -55,6 +55,8 @@ Vagrant.configure(2) do |config|
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_ansible_deb.sh"
       #Install and configure Samba via Shell Provisioner
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_configure_samba_deb.sh"
+      #Show IP Address of box
+      config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/print_ipaddress.sh"
       #Configure System using Ansible
       #config.vm.provision "ansible" do |ansible|
         #ansible.verbose = "v"
