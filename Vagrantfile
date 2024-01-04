@@ -49,7 +49,8 @@ Vagrant.configure(2) do |config|
 		    esxi.guest_disk_type       = 'thin'
         esxi.local_allow_overwrite = 'True'
       end
-
+      #Configure TimeZone
+      config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/configure_timezone.sh"      
       #Install Ansible via Shell Provisioner
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_ansible_deb.sh"
       #Install and configure Samba via Shell Provisioner
