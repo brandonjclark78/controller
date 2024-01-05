@@ -20,7 +20,7 @@ require_relative passwords_path
 
 #Include the Module name 'Secrets' in this Vagrant
 include Secrets
-include Controller
+include Network
 
 
 nodes = {
