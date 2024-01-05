@@ -58,6 +58,8 @@ Vagrant.configure(2) do |config|
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_configure_samba_deb.sh"
       #Install and configure Vagrant via Shell Provisioner
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_vagrant_deb"
+      #Install latest OVFtool from VMware
+      config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_ovftool_latest.sh"
       #Show IP Address of box
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/print_ipaddress.sh"
       #Configure System using Ansible
