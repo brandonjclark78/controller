@@ -8,10 +8,10 @@
 # Determine the operating system
 if Vagrant::Util::Platform.windows?
   # Windows path
-  passwords_path = File.expand_path("C:/Users/brandon/OneDrive/Code/secrets/passwords.rb", __FILE__)
+  passwords_path = File.expand_path("C:/Users/brandon/OneDrive/Code/secrets/secret_vars.rb", __FILE__)
 else
   # Linux path
-  passwords_path = File.expand_path("/secrets/passwords.rb", __FILE__)
+  passwords_path = File.expand_path("/secrets/secret_vars.rb", __FILE__)
 end
 
 # Require the passwords.rb file
@@ -20,8 +20,6 @@ require_relative passwords_path
 
 #Include the Module name 'Secrets' in this Vagrant
 include Secrets
-include Network
-
 
 nodes = {
 "controller" => ["generic/ubuntu2204", 2, 16384, 20 ]#,
@@ -42,9 +40,9 @@ Vagrant.configure(2) do |config|
       machine.vm.provider :vmware_esxi do |esxi|
         esxi.esxi_hostname         = Secrets::ESXi_Hostname
         esxi.esxi_username         = Secrets::ESXi_Username
-        esxi.esxi_password         = Secrets::ESXi_Password
-        esxi.esxi_virtual_network  = Network::Controller_VirtualNetwork
-        esxi.guest_mac_address     = Network::Controller_MAC
+        esxi.esxi_password         = Secrets::ESXi_Password 
+        esxi.esxi_virtual_network  = Secrets::ESXi_VirtualNetwork
+        esxi.guest_mac_address     = Secrets::Controller_MAC
         esxi.guest_numvcpus        = numvcpus
         esxi.guest_memsize         = memory
         esxi.guest_storage         = storage
