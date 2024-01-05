@@ -20,6 +20,7 @@ require_relative passwords_path
 
 #Include the Module name 'Secrets' in this Vagrant
 include Secrets
+include Controller
 
 
 nodes = {
@@ -42,12 +43,14 @@ Vagrant.configure(2) do |config|
         esxi.esxi_hostname         = Secrets::ESXi_Hostname
         esxi.esxi_username         = Secrets::ESXi_Username
         esxi.esxi_password         = Secrets::ESXi_Password
-        esxi.esxi_virtual_network  = "VM_PortGroup"
+        esxi.esxi_virtual_network  = Network::Controller_VirtualNetwork
+        esxi.guest_mac_address     = Network::Controller_MAC
         esxi.guest_numvcpus        = numvcpus
         esxi.guest_memsize         = memory
         esxi.guest_storage         = storage
 		    esxi.guest_disk_type       = 'thin'
         esxi.local_allow_overwrite = 'True'
+        esxi.guest_nic_type        = 'vmxnet3'
       end
       #Configure TimeZone
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/configure_timezone.sh"      
@@ -55,6 +58,8 @@ Vagrant.configure(2) do |config|
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_ansible_deb.sh"
       #Install and configure Samba via Shell Provisioner
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_configure_samba_deb.sh"
+      #Install and configure Vagrant via Shell Provisioner
+      config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/install_vagrant_deb"
       #Show IP Address of box
       config.vm.provision "shell", path: "https://raw.githubusercontent.com/brandonjclark78/autobuilds/main/print_ipaddress.sh"
       #Configure System using Ansible
