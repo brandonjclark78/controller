@@ -5,16 +5,22 @@
 # controller
 #
 
+# Vagrantfile
+
 # Determine the operating system
 if Vagrant::Util::Platform.windows?
   # Windows path
-  passwords_path = File.expand_path("C:/Users/brandon/OneDrive/Code/secrets/secret_vars.rb", __FILE__)
+  passwords_path = File.expand_path("C:\\Users\\brandon\\OneDrive\\Code\\Vagrant\\secrets\\secret_vars.rb", __FILE__)
+elsif Vagrant::Util::Platform.darwin?
+    # macOS path
+    passwords_path = File.expand_path("../../secrets/secret_vars.rb", __FILE__)
 else
-  # Linux path
+  # Assume Linux/Unix path for other operating systems
   passwords_path = File.expand_path("/secrets/secret_vars.rb", __FILE__)
 end
 
-# Require the passwords.rb file
+
+# Require the secret_vars.rb file
 require_relative passwords_path
 
 
